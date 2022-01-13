@@ -56,6 +56,22 @@
         text-decoration: none;
         color:#EDF5E1;
     }
+
+    .bottom-content{
+        text-align: center;
+    }
+    .bottom-content div{
+        padding: 20px;
+        display: inline-block;
+    }
+    .bottom-content .title{
+        display: block;
+        float: right;
+        padding-bottom: 5px;
+    }
+    .bottom-content span{
+        display: block;
+    }
 </style>
 {%endblock%}
 {%block content%}
@@ -77,7 +93,24 @@
         </div>
     </div>
     <hr>
-
+    <div class="bottom-content">
+        <div class="price" style="border-right: 2px outset {{Data.color}};">
+            <span class="title">Price</span>
+            <span class = "animate" data-target="{{Data.price}}">0</span>
+        </div>
+        <div class="24hVolume" style="border-right: 2px outset {{Data.color}};">
+            <span class="title">24H Volume</span>
+            <span class = "animate" data-target="{{Data.24hVolume}}">0</span>
+        </div>
+        <div class="marketCap" style="border-right: 2px outset {{Data.color}};">
+            <span class="title">Market Cap</span>
+            <span class = "animate" data-target="{{Data.marketCap}}">0</span>
+        </div>
+        <div class="allTimeHigh" style="border-right: 2px outset {{Data.color}};">
+            <span class="title">All-Time High</span>
+            <span class = "animate" data-target="{{Data.allTimeHigh.price}}">0</span>
+        </div>
+    </div>
 </div>
 {{Data}}
 {%endblock%}
