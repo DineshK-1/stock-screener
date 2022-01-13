@@ -1,7 +1,83 @@
 {%extends 'Template.html'%}
 
-{%block title%} {%endblock%}
+{%block Title%}{{Data.symbol}}{%endblock%}
+{%block style%}
+<style>
+    .panel {
+        transition: box-shadow .5s;
+        background-color: #EDF5E1;
+        margin: 50px;
+        border-radius: 30px;
+        padding: 30px;
+    }
+    .panel:hover {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
 
+    .panel .title {
+        font-weight: bolder;
+
+    }
+    .panel .symbol {
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 20px;
+        color: #EDF5E1;
+        font-size: small;
+    }
+    .panel img {
+        width: 100px;
+        height: 100px;
+    }
+    .panel .top {
+        display: flex;
+    }
+
+    .top-content{
+        padding: 10px;
+        width: 100%;
+    }
+    .top-content div{
+        padding: 10px;
+    }
+
+    .links{
+        transition: box-shadow .5s;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 20px;
+    }
+    .links span:hover{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+    .links a{
+        text-decoration: none;
+        color:#EDF5E1;
+    }
+</style>
+{%endblock%}
 {%block content%}
+<div class="panel">
+    <div class="top">
+        <img src="{{Data.iconUrl}}" alt="">
+        <div class="top-content">
+            <div>
+                <span class="title">{{Data.name}}</span>
+                <span class="symbol" style="background-color: {{Data.color}};">{{Data.symbol}}</span>
+            </div>
+            <hr>
+            <div class="links">
+                <i class='bx bx-link'></i>
+                {%for i in Data.links%}
+                <span class="links" style="background-color: {{Data.color}};"><a href="{{i.url}}">{{i.name}}</a></span>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+    <hr>
+
+</div>
 {{Data}}
 {%endblock%}
