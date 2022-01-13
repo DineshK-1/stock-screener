@@ -19,10 +19,12 @@
     .indexpanel th {
         padding: 15px;
         text-align: left;
+        font-weight: bolder;
     }
 
     .indexpanel td {
         padding: 15px;
+        font-weight: bold;
     }
 
     .indexpanel tr {
@@ -31,6 +33,10 @@
 
     .indexpanel tr.obj:hover {
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
+    canvas{
+        height: 200px !important;
+        width: 100% !important;
     }
 </style>
 {%endblock%}
@@ -41,18 +47,16 @@
             <col span="1" style="width: 5%;">
             <col span="1" style="width: 20%;">
             <col span="1" style="width: 8%;">
-            <col span="1" style="width: 12%;">
-            <col span="1" style="width: 15%;">
-            <col span="1" style="width: 20%;">
-            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 9%;">
+            <col span="1" style="width: 28%;">
+            <col span="1" style="width: 28%;">
         </colgroup>
         <tr>
             <th>Rank</th>
             <th>Name</th>
             <th>% Change</th>
-            <th>24h Volume</th>
-            <th></th>
             <th>Price</th>
+            <th>24h Volume</th>
             <th>Market Cap</th>
         </tr>
         {%for i in Data%}
@@ -61,29 +65,25 @@
             <td><img src="{{i.iconUrl}}"
                     style="width: 20px;height: 20px;vertical-align:middle;"></img><span>{{i.name}}({{i.symbol}})</span>
             </td>
-            <td style="text-align: right;"><span>{{i.change}}</span></td>
-            <td style="text-align: right;">${{i.24hVolume}}</td>
-            <td><canvas id="{{i.uuid}}" height="60px"></canvas></td>
-            <td style="text-align: right;">${{i.price}}</td>
-            <td style="text-align: right;">${{i.marketCap}}</td>
+            <td style="text-align: right;"><span class="filterint">{{i.change}}</span></td>
+            <td style="text-align: right;">$<span class="filterint">{{i.price}}</span></td>
+            <td style="text-align: right;">$<span class="filterint">{{i.24hVolume}}</span></td>
+            <td style="text-align: right;">$<span class="filterint">{{i.marketCap}}</span></td>
         </tr>
-
         {%endfor%}
     </table>
 </div>
 
-<canvas id="myChart" width="80px" height="80px"></canvas>
 <script>
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-        labels =["1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "1", "2", "2", "1", "2"],
-        type: 'line',
-        data: {
-            label: 'Dataset 1',
-            data: ["3245.7018018417017982710000", "3229.7735697418504283280000", "3245.3752813366815323200000", "3267.2019301889700409590000", "3267.4406411684827915790000", "3275.3354648532871328070000", "3309.8810273147705380590000", "3343.2970313427647698090000", "3372.8470077421887698390000", "3377.9659264645151844800000", "3369.3498684367998047030000", "3382.0002104270518870060000", "3387.8390972032260854860000", "3381.6085947039158288080000", "3386.9709878867553704550000", "3395.2748120696238807590000", "3383.5104754336205282500000", "3378.0575217507901146500000", "3383.1303308814874809150000", "3369.2977788871718915240000", "3349.6474931553256952920000", "3345.8472353773346736340000", "3344.6580172330104384820000", "3352.5941091627514320810000", "3345.8104494374445757020000", "3349.9583060680272481200000", "3351.7570983149814138470000"],
-            borderColor: Utils.CHART_COLORS.blue,
-            backgroundColor: Utils.transparentize(Utils.CHART_COLORS.red, 0.5),
-        },
+    function commas(num){
+        num = parseFloat(num).toFixed(2);
+        num = num.toString();
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    let a = document.querySelectorAll(".filterint");
+    a.forEach(element => {
+        element.innerHTML = commas(element.innerHTML);
     });
 </script>
 {%endblock%}
