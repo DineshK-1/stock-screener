@@ -10,6 +10,7 @@
         border-radius: 30px;
         padding: 30px;
     }
+
     .panel:hover {
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
@@ -18,6 +19,7 @@
         font-weight: bolder;
 
     }
+
     .panel .symbol {
         padding: 10px;
         padding-left: 20px;
@@ -26,52 +28,62 @@
         color: #EDF5E1;
         font-size: small;
     }
+
     .panel img {
         width: 100px;
         height: 100px;
     }
+
     .panel .top {
         display: flex;
     }
 
-    .top-content{
+    .top-content {
         padding: 10px;
         width: 100%;
     }
-    .top-content div{
+
+    .top-content div {
         padding: 10px;
     }
 
-    .links{
+    .links {
         transition: box-shadow .5s;
         padding: 10px;
         padding-left: 15px;
         padding-right: 15px;
         border-radius: 20px;
     }
-    .links span:hover{
+
+    .links span:hover {
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
-    .links a{
+
+    .links a {
         text-decoration: none;
-        color:#EDF5E1;
+        color: #EDF5E1;
     }
 
-    .bottom-content{
+    .bottom-content {
         text-align: center;
     }
-    .bottom-content div{
+
+    .bottom-content div {
         padding: 20px;
         display: inline-block;
     }
-    .bottom-content .title{
+
+    .bottom-content .title {
         display: block;
         float: right;
         padding-bottom: 5px;
     }
-    .bottom-content span{
+
+    .bottom-content span {
         display: block;
     }
+
+    .middle-content {}
 </style>
 {%endblock%}
 {%block content%}
@@ -93,24 +105,76 @@
         </div>
     </div>
     <hr>
+    <div class="middle-content">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
     <div class="bottom-content">
         <div class="price" style="border-right: 2px outset {{Data.color}};">
             <span class="title">Price</span>
-            <span class = "animate" data-target="{{Data.price}}">0</span>
+            <span class="animate" data-target="{{Data.price}}">0</span>
         </div>
         <div class="24hVolume" style="border-right: 2px outset {{Data.color}};">
             <span class="title">24H Volume</span>
-            <span class = "animate" data-target="{{Data.24hVolume}}">0</span>
+            <span class="animate" data-target="{{Data.24hVolume}}">0</span>
         </div>
         <div class="marketCap" style="border-right: 2px outset {{Data.color}};">
             <span class="title">Market Cap</span>
-            <span class = "animate" data-target="{{Data.marketCap}}">0</span>
+            <span class="animate" data-target="{{Data.marketCap}}">0</span>
         </div>
         <div class="allTimeHigh" style="border-right: 2px outset {{Data.color}};">
             <span class="title">All-Time High</span>
-            <span class = "animate" data-target="{{Data.allTimeHigh.price}}">0</span>
+            <span class="animate" data-target="{{Data.allTimeHigh.price}}">0</span>
         </div>
     </div>
 </div>
-{{Data}}
+
+<script>
+    const data = null;
+
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            var dataa = JSON.parse(this.responseText);
+            var time = dataa.data.history.map(function (elem) {
+                return elem.timestamp;
+            })
+            var p = dataa.data.history.map(function (elem) {
+                return elem.price;
+            })
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: time,
+                    datasets: [{
+                        label: '',
+                        data: p,
+                        backgroundColor: 'transparent',
+                        borderColor: '#05386B',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    elements: {
+                        line: {
+                            tension: 0
+                        }
+                    }
+                }
+            });
+        }
+    });
+
+    xhr.open("GET", "https://coinranking1.p.rapidapi.com/coin/Qwsogvtv82FCd/history?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h");
+    xhr.setRequestHeader("x-rapidapi-host", "coinranking1.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6");
+
+    xhr.send(data);
+    console.log(time, p);
+
+
+
+</script>
 {%endblock%}
