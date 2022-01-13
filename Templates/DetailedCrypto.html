@@ -83,7 +83,9 @@
         display: block;
     }
 
-    .middle-content {}
+    canvas {
+        height: 400px !important;
+    }
 </style>
 {%endblock%}
 {%block content%}
@@ -138,7 +140,8 @@
         if (this.readyState === this.DONE) {
             var dataa = JSON.parse(this.responseText);
             var time = dataa.data.history.map(function (elem) {
-                return elem.timestamp;
+                var myDate = new Date(elem.timestamp * 1000);
+                return myDate.toLocaleString();
             })
             var p = dataa.data.history.map(function (elem) {
                 return elem.price;
@@ -153,15 +156,18 @@
                         data: p,
                         backgroundColor: 'transparent',
                         borderColor: '#05386B',
-                        borderWidth: 4
+                        borderWidth: 3
                     }]
                 },
                 options: {
-                    elements: {
-                        line: {
-                            tension: 0
-                        }
-                    }
+                    scales: {
+                        xAxes: [{
+                            display: false
+                        }]
+                    },
+                    maintainAspectRatio: false,
+                    tooltipEvents: [],
+                    scaleShowGridLines: false,
                 }
             });
         }
@@ -172,9 +178,5 @@
     xhr.setRequestHeader("x-rapidapi-key", "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6");
 
     xhr.send(data);
-    console.log(time, p);
-
-
-
 </script>
 {%endblock%}
