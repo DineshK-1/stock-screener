@@ -80,24 +80,11 @@
             </td>
             </a>
             <td style="text-align: right;"><span class="filterint">{{i.change}}</span></td>
-            <td style="text-align: right;">$<span class="filterint">{{i.price}}</span></td>
-            <td style="text-align: right;">$<span class="filterint">{{i.24hVolume}}</span></td>
-            <td style="text-align: right;">$<span class="filterint">{{i.marketCap}}</span></td>
+            <td style="text-align: right;">$<span class="filterint" data-target="{{i.price}}">{{i.price}}</span></td>
+            <td style="text-align: right;">$<span class="filterint" data-target="{{i.24hVolume}}">{{i.24hVolume}}</span></td>
+            <td style="text-align: right;">$<span class="filterint" data-target="{{i.marketCap}}">{{i.marketCap}}</span></td>
         </tr>
         {%endfor%}
     </table>
 </div>
-
-<script>
-    function commas(num) {
-        num = parseFloat(num).toFixed(2);
-        num = num.toString();
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    let a = document.querySelectorAll(".filterint");
-    a.forEach(element => {
-        element.innerHTML = commas(element.innerHTML);
-    });
-</script>
 {%endblock%}
