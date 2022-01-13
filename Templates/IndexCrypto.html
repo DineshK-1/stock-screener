@@ -9,7 +9,7 @@
     }
 
     .indexpanel:hover {
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 5px;
     }
 
     .indexpanel table {
@@ -23,9 +23,22 @@
     }
 
     .indexpanel td {
+
+        transition: box-shadow .5s;
         padding: 15px;
         font-weight: bold;
     }
+
+    .indexpanel td a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .indexpanel td:hover {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+
 
     .indexpanel tr {
         transition: box-shadow .5s;
@@ -33,10 +46,6 @@
 
     .indexpanel tr.obj:hover {
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    }
-    canvas{
-        height: 200px !important;
-        width: 100% !important;
     }
 </style>
 {%endblock%}
@@ -62,9 +71,14 @@
         {%for i in Data%}
         <tr class="obj">
             <td>#{{i.rank}}</td>
-            <td><img src="{{i.iconUrl}}"
-                    style="width: 20px;height: 20px;vertical-align:middle;"></img><span>{{i.name}}({{i.symbol}})</span>
+
+            <td>
+                <img src="{{i.iconUrl}}" style="width: 20px;height: 20px;vertical-align:middle;"></img>
+                <a href="http://127.0.0.1:8000/Cryptos/{{i.uuid}}">
+                    <span>{{i.name}}({{i.symbol}})</span>
+                </a>
             </td>
+            </a>
             <td style="text-align: right;"><span class="filterint">{{i.change}}</span></td>
             <td style="text-align: right;">$<span class="filterint">{{i.price}}</span></td>
             <td style="text-align: right;">$<span class="filterint">{{i.24hVolume}}</span></td>
@@ -75,7 +89,7 @@
 </div>
 
 <script>
-    function commas(num){
+    function commas(num) {
         num = parseFloat(num).toFixed(2);
         num = num.toString();
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
