@@ -43,6 +43,7 @@
         .nav li a:hover {
             background-color: #379683;
         }
+
         .nav li a.active {
             background-color: #379683;
         }
@@ -52,13 +53,47 @@
 <body>
 
     <ul class="nav">
-        <li><a class = "active" href="{%url 'CryptoIndex'%}">Cryptos</a></li>
+        <li><a class="active" href="{%url 'CryptoIndex'%}">Cryptos</a></li>
         <li><a href="#">Home</a></li>
     </ul>
 
     {%block content%}
     {%endblock%}
-    
+
+    <script>
+        function commas(num) {
+            num = parseFloat(num).toFixed(2);
+            num = num.toString();
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        const query = document.querySelectorAll(".animate");
+        const speed = 100;
+        query.forEach(element => {
+            const updateCount = () => {
+                target = +element.getAttribute("data-target");
+                count = +element.innerText;
+
+                inc = target*0.01;
+
+                if (count < target) {
+                    element.innerText = count + inc;
+                    setTimeout(updateCount, 1);
+                }
+                else {
+                    element.innerText = "$"+commas(target);
+                }
+            }
+
+            updateCount();
+        });
+        
+
+        let a = document.querySelectorAll(".filterint");
+        a.forEach(element => {
+            element.innerHTML = commas(element.innerHTML);
+        });
+    </script>
 </body>
 
 </html>
