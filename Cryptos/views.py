@@ -9,4 +9,4 @@ def IndexCrypto(request):
 
 def DetailedCrypto(request, uuid):
     response = requests.request("GET", "http://127.0.0.1:8000/static/CoinCall.json")
-    return render(request, "DetailedCrypto.html", {'Data': response.json()})
+    return render(request, "DetailedCrypto.html", {'Data': response.json()["data"]["coin"]})
