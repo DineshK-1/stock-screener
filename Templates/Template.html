@@ -1,13 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>{%block title%}{%endblock%}</title>
+    <title>{%block Title%}{%endblock%}</title>
     {%block style%}
     {%endblock%}
+
+    <style>
+        html,
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .nav {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #5CDB95;
+        }
+
+        .nav li {
+            float: right;
+        }
+
+        .nav li a {
+            transition: background-color .5s;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .nav li a:hover {
+            background-color: #379683;
+        }
+        .nav li a.active {
+            background-color: #379683;
+        }
+    </style>
 </head>
+
 <body>
+
+    <ul class="nav">
+        <li><a class = "active" href="{%url 'CryptoIndex'%}">Cryptos</a></li>
+        <li><a href="#">Home</a></li>
+    </ul>
+
     {%block content%}
     {%endblock%}
 </body>
+
 </html>
