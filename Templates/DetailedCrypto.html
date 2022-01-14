@@ -147,6 +147,9 @@
                 return elem.price;
             })
             const ctx = document.getElementById('myChart').getContext('2d');
+            let gradient = ctx.createLinearGradient(0,0,0,400);
+            gradient.addColorStop(0, "rgba(5,56,107,1)");
+            gradient.addColorStop(1, "rgba(127,90,131,0.8)");
             const myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -154,20 +157,47 @@
                     datasets: [{
                         label: '',
                         data: p,
-                        backgroundColor: 'transparent',
+                        backgroundColor: gradient,
                         borderColor: '#05386B',
-                        borderWidth: 3
+                        borderWidth: 3,
+                        fill:true,
                     }]
                 },
                 options: {
+                    radius:2,
+                    hoverRadius:8,
+                    hitRadius: 200,
+
                     scales: {
-                        xAxes: [{
-                            display: false
-                        }]
+                        x: {
+                            ticks: {
+                                display: false
+                            },
+                            grid: {
+                                color: "rgba(0, 0, 0, 0)",
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                color: "#05386B",
+                                font: {
+                                    size: 14,
+                                    weight: "bold",
+
+                                }
+                            },
+                            grid: {
+                                color: "rgba(0, 0, 0, 0)",
+                            },
+                            callback:function(value){
+                                return "$"+value;
+                            },
+                        }
+                    },
+                    hover: {
+                        intersect: false
                     },
                     maintainAspectRatio: false,
-                    tooltipEvents: [],
-                    scaleShowGridLines: false,
                 }
             });
         }
