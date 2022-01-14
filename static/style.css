@@ -79,18 +79,27 @@ body {
 }
 
 .links {
+    display: flex;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.links .link{
+    display: flex;
     transition: box-shadow .5s;
     padding: 10px;
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 20px;
 }
-
-.links span:hover {
+.links .link span{
+    transition: box-shadow .5s;
+}
+.links .link span:hover {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.links a {
+.links .link a {
     text-decoration: none;
     color: #EDF5E1;
 }
