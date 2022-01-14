@@ -110,17 +110,28 @@
     .ohlc .topp {
         display: block;
         border-bottom: 2px ridge;
+        padding: 5px;
     }
     .ohlc .topp .current{
         font-weight: bolder;
         display: inline;
         font-size: x-large;
+        margin-right: 5px;
     }
     .ohlc .topp .changeohlc{
         font-weight: bolder;
         display: inline-block;
-        padding: 5px;
+        padding: 10px;
         font-size: normal;
+        border-radius: 10px;
+    }
+    .ohlc .lowhigh{
+        font-weight: bolder;
+        display: block;
+        padding: 10px;
+        margin: 5px;
+        border-radius: 10px;
+        background-color: lightgrey;
     }
 </style>
 {%endblock%}
@@ -148,12 +159,12 @@
         </div>
         <div class="ohlc">
             <div class="topp">
-                <span class="current animate" data-target="{{Data.price}}">0</span>
-                <span class="changeohlc">5</span>
+                <span class="current">$<span class="fixcomma">{{Data.price}}</span></span>
+                <span class="changeohlc">0</span>
             </div>
             
-            <span class="low animate" data-target="{{OHLCData.low}}">0</span>
-            <span class="high animate" data-target="{{OHLCData.high}}">0</span>
+            <span class="lowhigh">Low: $<span class= "fixcomma">{{OHLCData.low}}</span></span>
+            <span class="lowhigh">High: $<span class="fixcomma">{{OHLCData.high}}</span></span>
             
         </div>
     </div>
@@ -288,6 +299,13 @@
     xhr.send(data);
 </script>
 <script>
-    document.querySelector(".changeohlc").innerHTML = 
+    let change = (parseFloat({{Data.price}})/parseFloat({{OHLCData.open}})).toFixed(3)
+    elee = document.querySelector(".changeohlc")
+    if(change <= 0){
+        elee.style.backgroundColor = "#E74C3C";
+    }else{
+        elee.style.backgroundColor = "#2ECC71";
+    }
+    elee.innerHTML = change;
 </script>
 {%endblock%}
