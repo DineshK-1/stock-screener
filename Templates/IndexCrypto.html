@@ -47,9 +47,53 @@
     .indexpanel tr.obj:hover {
         box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
+    .toppanel{
+        display: flex;
+        margin: 50px;
+    }
+
+    .smallpanel{
+        transition: box-shadow .5s;
+        margin-right: 50px;
+        width: 200px;
+        padding: 20px;
+        background-color: #EDF5E1;
+        border-radius: 20px;
+    }
+    .smallpanel:hover{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 5px;
+    }
+    .smallpanel .title{
+        display: block;
+        font-weight: bolder;
+        margin-bottom: 10px;
+        border-bottom: 2px solid grey;
+    }
 </style>
 {%endblock%}
 {%block content%}
+<div class="toppanel">
+    <div class="smallpanel">
+        <span class="title">Total Coins</span>
+        <span class="animatew" data-target="{{Data.stats.totalCoins}}"></span>
+    </div>
+    <div class="smallpanel">
+        <span class="title">Total Markets</span>
+        <span class="animatew" data-target="{{Data.stats.totalMarkets}}"></span>
+    </div>
+    <div class="smallpanel">
+        <span class="title">Total Exchanges</span>
+        <span class="animatew" data-target="{{Data.stats.totalExchanges}}"></span>
+    </div>
+    <div class="smallpanel">
+        <span class="title">Total Market Cap</span>
+        <span class="animate" data-target="{{Data.stats.totalMarketCap}}"></span>
+    </div>
+    <div class="smallpanel">
+        <span class="title">Total 24H Volume</span>
+        <span class="animate" data-target="{{Data.stats.total24hVolume}}"></span>
+    </div>
+</div>
 <div class="indexpanel">
     <table>
         <colgroup>
@@ -68,7 +112,7 @@
             <th>24h Volume</th>
             <th>Market Cap</th>
         </tr>
-        {%for i in Data%}
+        {%for i in Data.coins%}
         <tr class="obj">
             <td>#{{i.rank}}</td>
 
