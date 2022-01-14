@@ -101,8 +101,9 @@
             <col span="1" style="width: 20%;">
             <col span="1" style="width: 8%;">
             <col span="1" style="width: 9%;">
-            <col span="1" style="width: 28%;">
-            <col span="1" style="width: 28%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 20%;">
+            <col span="1" style="width: 16%;">
         </colgroup>
         <tr>
             <th>Rank</th>
@@ -111,6 +112,7 @@
             <th>Price</th>
             <th>24h Volume</th>
             <th>Market Cap</th>
+            <th>Listed At</th>
         </tr>
         {%for i in Data.coins%}
         <tr class="obj">
@@ -125,10 +127,25 @@
             </a>
             <td style="text-align: right;"><span class="filterint">{{i.change}}</span></td>
             <td style="text-align: right;">$<span class="filterint" data-target="{{i.price}}">{{i.price}}</span></td>
+            
             <td style="text-align: right;">$<span class="filterint" data-target="{{i.24hVolume}}">{{i.24hVolume}}</span></td>
             <td style="text-align: right;">$<span class="filterint" data-target="{{i.marketCap}}">{{i.marketCap}}</span></td>
+            <td style="text-align: right;"><span class="epoch">{{i.listedAt}}</span></td>
         </tr>
         {%endfor%}
     </table>
 </div>
+
+<script>
+    let ep = document.querySelectorAll(".epoch");
+    ep.forEach(element => {
+        element.innerHTML = convertepoch(element.innerHTML);
+    });
+
+    function convertepoch(date){
+        var myDate = new Date(date*1000);
+        return myDate.toLocaleString();
+    }
+    
+</script>
 {%endblock%}
