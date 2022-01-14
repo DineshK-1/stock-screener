@@ -66,6 +66,10 @@
             num = num.toString();
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
+        commaobj =   document.querySelectorAll(".fixcomma");
+        commaobj.forEach(ele =>{
+            ele.innerHTML = commas(ele.innerHTML);
+        })
 
         function commasint(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
