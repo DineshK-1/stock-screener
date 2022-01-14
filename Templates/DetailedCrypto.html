@@ -100,9 +100,13 @@
             <hr>
             <div class="links">
                 <i class='bx bx-link'></i>
+                {%if Data.links%}
                 {%for i in Data.links%}
                 <span class="links" style="background-color: {{Data.color}};"><a href="{{i.url}}">{{i.name}}</a></span>
                 {%endfor%}
+                {%else%}
+                <span class="links" style="background-color: {{Data.color}};">No Links Available</span>
+                {%endif%}
             </div>
         </div>
     </div>
