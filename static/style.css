@@ -1,0 +1,247 @@
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Epilogue';
+    background-color: #8EE4AF;
+}
+
+.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #5CDB95;
+}
+
+.nav li {
+    float: right;
+}
+
+.nav li a {
+    transition: background-color .5s;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.nav li a:hover {
+    background-color: #379683;
+}
+
+.nav li a.active {
+    background-color: #379683;
+}
+
+.panel {
+    transition: box-shadow .5s;
+    background-color: #EDF5E1;
+    margin: 50px;
+    border-radius: 30px;
+    padding: 30px;
+}
+
+.panel:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.panel .title {
+    font-weight: bolder;
+}
+
+.panel .symbol {
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 20px;
+    color: #EDF5E1;
+    font-size: small;
+}
+
+.panel img {
+    width: 100px;
+    height: 100px;
+}
+
+.panel .top {
+    display: flex;
+}
+
+.top-content {
+    padding: 10px;
+    width: 100%;
+}
+
+.top-content div {
+    padding: 10px;
+}
+
+.links {
+    transition: box-shadow .5s;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 20px;
+}
+
+.links span:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.links a {
+    text-decoration: none;
+    color: #EDF5E1;
+}
+
+.bottom-content {
+    text-align: center;
+}
+
+.bottom-content div {
+    padding: 20px;
+    display: inline-block;
+}
+
+.bottom-content .title {
+    display: block;
+    float: right;
+    padding-bottom: 5px;
+}
+
+.bottom-content span {
+    display: block;
+}
+
+canvas {
+    height: 400px !important;
+}
+
+.bottom-bottom {
+    display: flex;
+}
+
+.bottom-bottom div {
+    display: block;
+    text-align: center;
+    padding: 20px;
+    border-radius: 20px;
+    margin-right: 30px;
+    color: #EDF5E1;
+}
+
+.bottom-bottom .title {
+    display: block;
+    margin-bottom: 10px;
+    border-bottom: 3px solid;
+}
+
+.ohlc {
+    width: 300px;
+    padding: 10px;
+    border-left: 2px ridge;
+}
+
+.ohlc .topp {
+    display: block;
+    border-bottom: 2px ridge;
+    padding: 5px;
+}
+
+.ohlc .topp .current {
+    font-weight: bolder;
+    display: inline;
+    font-size: x-large;
+    margin-right: 5px;
+}
+
+.ohlc .topp .changeohlc {
+    font-weight: bolder;
+    display: inline-block;
+    padding: 10px;
+    font-size: normal;
+    border-radius: 10px;
+}
+
+.ohlc .lowhigh {
+    font-weight: bolder;
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    background-color: lightgrey;
+}
+
+.indexpanel {
+    transition: box-shadow .5s;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 5px;
+    margin: 50px;
+    border-radius: 20px;
+    background-color: #EDF5E1;
+}
+
+.indexpanel:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.indexpanel table {
+    width: 100%;
+}
+
+.indexpanel th {
+    padding: 15px;
+    text-align: left;
+    font-weight: bolder;
+}
+
+.indexpanel td {
+    font-size: small;
+    transition: box-shadow .5s;
+    padding: 15px;
+    font-weight: bold;
+}
+
+.indexpanel td a {
+    color: black;
+    text-decoration: none;
+}
+
+.indexpanel td:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.indexpanel tr {
+    transition: box-shadow .5s;
+}
+
+.indexpanel tr.obj:hover {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.toppanel {
+    display: flex;
+    margin: 50px;
+    text-align: center;
+}
+
+.smallpanel {
+    transition: box-shadow .5s;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-right: 50px;
+    width: 300px;
+    padding: 20px;
+    background-color: #EDF5E1;
+    border-radius: 20px;
+}
+
+.smallpanel:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 5px;
+}
+
+.smallpanel .title {
+    display: block;
+    font-weight: bolder;
+    margin-bottom: 10px;
+    border-bottom: 2px solid grey;
+}

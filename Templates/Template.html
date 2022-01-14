@@ -6,48 +6,8 @@
     <title>{%block Title%}{%endblock%}</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Epilogue' rel='stylesheet'>
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    {%block style%}
-    {%endblock%}
-
-    <style>
-        html,
-        body {
-            margin: 0px;
-            padding: 0px;
-            font-family: 'Epilogue';
-            background-color: #8EE4AF;
-        }
-
-        .nav {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #5CDB95;
-        }
-
-        .nav li {
-            float: right;
-        }
-
-        .nav li a {
-            transition: background-color .5s;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .nav li a:hover {
-            background-color: #379683;
-        }
-
-        .nav li a.active {
-            background-color: #379683;
-        }
-    </style>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'> {%load static%}
+    <link href='{%static "style.css"%}' rel='stylesheet'> {%block style%} {%endblock%}
 </head>
 
 <body>
@@ -62,8 +22,7 @@
         {%endif%}
     </ul>
 
-    {%block content%}
-    {%endblock%}
+    {%block content%} {%endblock%}
 
     <script>
         function commas(num) {
@@ -92,8 +51,7 @@
                 if (count < target) {
                     element.innerText = count + inc;
                     setTimeout(updateCount, 1);
-                }
-                else {
+                } else {
                     element.innerText = "$" + commas(target);
                 }
             }
@@ -111,8 +69,7 @@
                 if (count < target) {
                     element.innerText = count + inc;
                     setTimeout(updateCount, 1);
-                }
-                else {
+                } else {
                     element.innerText = commasint(target);
                 }
             }
