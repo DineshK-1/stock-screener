@@ -2,6 +2,9 @@ from django.shortcuts import render
 import requests
 import json
 
+def Home(request):
+    return render(request, "Home.html")
+
 def IndexCrypto(request):
     url = "https://coinranking1.p.rapidapi.com/coins"
 
