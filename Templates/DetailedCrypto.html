@@ -299,13 +299,13 @@
     xhr.send(data);
 </script>
 <script>
-    let change = (parseFloat({{Data.price}})/parseFloat({{OHLCData.open}})).toFixed(3)
+    let change = ((parseFloat({{Data.price}})-parseFloat({{OHLCData.open}})).toFixed(3))/(parseFloat({{Data.price}}))*100
     elee = document.querySelector(".changeohlc")
     if(change <= 0){
         elee.style.backgroundColor = "#E74C3C";
     }else{
         elee.style.backgroundColor = "#2ECC71";
     }
-    elee.innerHTML = change;
+    elee.innerHTML = (change.toFixed(3)).toString()+"%";
 </script>
 {%endblock%}
