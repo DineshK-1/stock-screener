@@ -89,6 +89,7 @@ span.links {
     padding: 10px;
     padding-left: 15px;
     padding-right: 15px;
+    margin-bottom: 10px;
 }
 .links .link{
     display: inline-block;
