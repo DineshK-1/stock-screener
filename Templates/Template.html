@@ -53,8 +53,13 @@
 <body>
 
     <ul class="nav">
+        {%if request.path == "/Cryptos"%}
         <li><a class="active" href="{%url 'CryptoIndex'%}">Cryptos</a></li>
-        <li><a href="#">Home</a></li>
+        <li><a href="{%url 'Home'%}">Home</a></li>
+        {%else%}
+        <li><a href="{%url 'CryptoIndex'%}">Cryptos</a></li>
+        <li><a class="active" href="{%url 'Home'%}">Home</a></li>
+        {%endif%}
     </ul>
 
     {%block content%}
@@ -66,8 +71,8 @@
             num = num.toString();
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        commaobj =   document.querySelectorAll(".fixcomma");
-        commaobj.forEach(ele =>{
+        commaobj = document.querySelectorAll(".fixcomma");
+        commaobj.forEach(ele => {
             ele.innerHTML = commas(ele.innerHTML);
         })
 
@@ -82,14 +87,14 @@
                 target = +element.getAttribute("data-target");
                 count = +element.innerText;
 
-                inc = target*0.01;
+                inc = target * 0.01;
 
                 if (count < target) {
                     element.innerText = count + inc;
                     setTimeout(updateCount, 1);
                 }
                 else {
-                    element.innerText = "$"+commas(target);
+                    element.innerText = "$" + commas(target);
                 }
             }
 
@@ -101,7 +106,7 @@
                 target = +element.getAttribute("data-target");
                 count = +element.innerText;
 
-                inc = target*0.01;
+                inc = target * 0.01;
 
                 if (count < target) {
                     element.innerText = count + inc;
@@ -114,7 +119,7 @@
 
             updateCount();
         });
-        
+
 
         let a = document.querySelectorAll(".filterint");
         a.forEach(element => {
