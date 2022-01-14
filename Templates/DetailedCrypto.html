@@ -86,6 +86,42 @@
     canvas {
         height: 400px !important;
     }
+    .bottom-bottom{
+        display: flex;
+    }
+    .bottom-bottom div{
+        display: block;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px;
+        margin-right: 30px;
+        color: #EDF5E1;
+    }
+    .bottom-bottom .title{
+        display: block;
+        margin-bottom: 10px;
+        border-bottom: 3px solid;
+    }
+    .ohlc{
+        width: 300px;
+        padding:10px;
+        border-left: 2px ridge;
+    }
+    .ohlc .topp {
+        display: block;
+        border-bottom: 2px ridge;
+    }
+    .ohlc .topp .current{
+        font-weight: bolder;
+        display: inline;
+        font-size: x-large;
+    }
+    .ohlc .topp .changeohlc{
+        font-weight: bolder;
+        display: inline-block;
+        padding: 5px;
+        font-size: normal;
+    }
 </style>
 {%endblock%}
 {%block content%}
@@ -96,6 +132,7 @@
             <div>
                 <span class="title">{{Data.name}}</span>
                 <span class="symbol" style="background-color: {{Data.color}};">{{Data.symbol}}</span>
+                <span class="symbol" style="background-color: {{Data.color}};">#{{Data.rank}}</span>
             </div>
             <hr>
             <div class="links">
@@ -109,10 +146,23 @@
                 {%endif%}
             </div>
         </div>
+        <div class="ohlc">
+            <div class="topp">
+                <span class="current animate" data-target="{{Data.price}}">0</span>
+                <span class="changeohlc">5</span>
+            </div>
+            
+            <span class="low animate" data-target="{{OHLCData.low}}">0</span>
+            <span class="high animate" data-target="{{OHLCData.high}}">0</span>
+            
+        </div>
     </div>
     <hr>
     <div class="middle-content">
         <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <div class="midbot-content">
+        
     </div>
     <div class="bottom-content">
         <div class="price" style="border-right: 2px outset {{Data.color}};">
@@ -130,6 +180,17 @@
         <div class="allTimeHigh" style="border-right: 2px outset {{Data.color}};">
             <span class="title">All-Time High</span>
             <span class="animate" data-target="{{Data.allTimeHigh.price}}">0</span>
+        </div>
+    </div>
+    <hr>
+    <div class="bottom-bottom">
+        <div style="background-color: {{Data.color}};">
+            <span class="title">Number of markets</span>
+            <span>{{Data.numberOfMarkets}}</span>
+        </div>
+        <div style="background-color: {{Data.color}};">
+            <span class="title">Number of exchanges</span>
+            <span>{{Data.numberOfExchanges}}</span>
         </div>
     </div>
 </div>
@@ -225,5 +286,8 @@
     xhr.setRequestHeader("x-rapidapi-key", "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6");
 
     xhr.send(data);
+</script>
+<script>
+    document.querySelector(".changeohlc").innerHTML = 
 </script>
 {%endblock%}
