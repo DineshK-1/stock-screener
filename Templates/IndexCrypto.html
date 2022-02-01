@@ -78,7 +78,7 @@
             <th>Price</th>
             <th>24h Volume</th>
             <th>Market Cap</th>
-            <th>Listed At</th>
+            <th></th>
         </tr>
         {%for i in Data.coins%}
         <tr class="obj">
@@ -104,7 +104,10 @@
             </td>
             <td style="text-align: right;">$<span class="filterint" data-target="{{i.marketCap}}">{{i.marketCap}}</span>
             </td>
-            <td style="text-align: right;"><span class="epoch">{{i.listedAt}}</span></td>
+            <!--<td style="text-align: right;"><span class="epoch">{{i.listedAt}}</span></td>-->
+            <td class="sparklines">
+                <canvas id="{{ forloop.counter0 }}" style="width: 250px !important;height: 50px !important;"></canvas>
+            </td>
         </tr>
         {%endfor%}
     </table>
@@ -158,6 +161,89 @@
         var myDate = new Date(date * 1000);
         return myDate.toLocaleString();
     }
+</script>
+<script>
+    var sparklines = document.querySelectorAll(".sparklines");
+    function parseJson(data) {
+        console.log(JSON.parse(data));
+    }
+    const data = null;
 
+    const xhr = new XMLHttpRequest();
+    xhr.withCredentials = true;
+
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            var respone = JSON.parse(this.responseText);
+            responsee = respone.data.coins
+            for (i = 0; i <= responsee.length; i++) {
+                var y = responsee[i].sparkline.map(function (elem) {
+                    return elem;
+                })
+                var x = Object.keys(y);
+                const ctx = document.getElementById(i).getContext('2d');
+                let delayed;
+                let gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                gradient.addColorStop(0, "rgba(5,56,107,1)");
+                gradient.addColorStop(1, "rgba(127,90,131,0.8)");
+                window.myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: x,
+                        datasets: [{
+                            label: '',
+                            data: y,
+                            borderColor: '#05386B',
+                            borderWidth: 1,
+                            tension: 0.3,
+                        }]
+                    },
+                    options: {
+                        radius: 1,
+                        hoverRadius: 8,
+                        hitRadius: 10,
+                        scales: {
+                            x: {
+                                ticks: {
+                                    display: false
+                                },
+                                grid: {
+                                    color: "rgba(0, 0, 0, 0)",
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    display: false,
+                                },
+                                grid: {
+                                    color: "rgba(0, 0, 0, 0)",
+                                },
+                                callback: function (value) {
+                                    return "$" + value;
+                                },
+                            }
+                        },
+                        hover: {
+                            intersect: false
+                        },
+                        maintainAspectRatio: false,
+                        normalized: true,
+                        plugins: {
+                            legend: {
+                                display: false,
+                            }
+                        }
+                    }
+                });
+                myChart.reset();
+                myChart.update();
+            }
+        }
+    });
+    xhr.open("GET", "https://coinranking1.p.rapidapi.com/coins?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h&orderBy=marketCap&orderDirection=desc&limit=50&offset=200");
+    xhr.setRequestHeader("x-rapidapi-host", "coinranking1.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6");
+
+    xhr.send(data);
 </script>
 {%endblock%}

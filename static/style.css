@@ -308,3 +308,7 @@ canvas {
     background-color: #379683;
     font-weight: bold;
 }
+.sparklines canvas{
+    width: 250px !important;
+    height: 50px !important;
+}
