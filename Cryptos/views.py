@@ -5,10 +5,10 @@ import json
 def Home(request):
     return render(request, "Home.html")
 
-def IndexCrypto(request):
+def IndexCrypto(request, page):
     url = "https://coinranking1.p.rapidapi.com/coins"
 
-    querystring = {"referenceCurrencyUuid":"yhjMzLPhuIDl","timePeriod":"24h","tiers":"1","orderBy":"marketCap","orderDirection":"desc","limit":"50","offset":"0"}
+    querystring = {"referenceCurrencyUuid":"yhjMzLPhuIDl","timePeriod":"24h","tiers":"1","orderBy":"marketCap","orderDirection":"desc","limit":"50","offset":str((page-1)*50)}
 
     headers = {
     'x-rapidapi-host': "coinranking1.p.rapidapi.com",
@@ -17,6 +17,7 @@ def IndexCrypto(request):
 
     response = requests.request("GET", url, headers=headers, params=querystring)
     return render(request, "IndexCrypto.html", {'Data': response.json()["data"]})
+
 
 def DetailedCrypto(request, uuid):
     url = "https://coinranking1.p.rapidapi.com/coin/"+uuid

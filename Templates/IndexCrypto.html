@@ -49,7 +49,7 @@
 
             <td>
                 <img src="{{i.iconUrl}}" style="width: 20px;height: 20px;vertical-align:middle;"></img>
-                <a href="https://crypto-apes.herokuapp.com/Cryptos/{{i.uuid}}">
+                <a href="{%url 'DetailedCrypto' i.uuid%}">
                     <span>{{i.name}}({{i.symbol}})</span>
                 </a>
             </td>

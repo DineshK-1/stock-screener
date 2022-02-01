@@ -23,6 +23,6 @@ from Cryptos.views import IndexCrypto,DetailedCrypto,Home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", Home, name="Home"),
-    path("Cryptos", IndexCrypto, name = "CryptoIndex"),
-    path("Cryptos/<str:uuid>", DetailedCrypto)
+    path("Cryptos/<int:page>", IndexCrypto, name = "CryptoIndex"),
+    path("Cryptos/<str:uuid>", DetailedCrypto, name = "DetailedCrypto")
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
