@@ -261,3 +261,19 @@ canvas {
     margin-bottom: 10px;
     border-bottom: 2px solid grey;
 }
+.periodcontainer {
+    padding: 5px;
+    user-select: none;
+
+}
+
+.periods {
+    background-color: lightgrey;
+    color: black;
+    padding: 10px;
+    float: right;
+}
+
+.periodsactive {
+    background-color: grey;
+}

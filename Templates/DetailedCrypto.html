@@ -19,43 +19,43 @@
                     {%for i in Data.links%}
                     {%if Data.color == None%}
                     <span class="links" style="background-color: #3C3C3D;">
-                    {%else%}
-                    <span class="links" style="background-color: {{Data.color}};">
-                    {%endif%}
-                        {%if i.type == "website"%}
-                        <i class='bx bxl-google'></i>
-                        {%elif i.type == "discord"%}
-                        <i class='bx bxl-discord-alt' ></i>
-                        {%elif i.type == "facebook"%}
-                        <i class='bx bxl-facebook-circle' ></i>
-                        {%elif i.type == "github"%}
-                        <i class='bx bxl-github' ></i>
-                        {%elif i.type == "instagram"%}
-                        <i class='bx bxl-instagram-alt' ></i>
-                        {%elif i.type == "linkedin"%}
-                        <i class='bx bxl-linkedin-square'></i>
-                        {%elif i.type == "medium"%}
-                        <i class='bx bxl-medium-square' ></i>
-                        {%elif i.type == "quora"%}
-                        <i class='bx bxl-quora' ></i>
-                        {%elif i.type == "reddit"%}
-                        <i class='bx bxl-reddit' ></i>
-                        {%elif i.type == "telegram"%}
-                        <i class='bx bxl-telegram' ></i>
-                        {%elif i.type == "tiktok"%}
-                        <i class='bx bxl-tiktok' ></i>
-                        {%elif i.type == "twitter"%}
-                        <i class='bx bxl-twitter' ></i>
-                        {%elif i.type == "whitepaper"%}
-                        <i class='bx bx-paperclip' ></i>
-                        {%elif i.type == "youtube"%}
-                        <i class='bx bxl-youtube' ></i>
+                        {%else%}
+                        <span class="links" style="background-color: {{Data.color}};">
+                            {%endif%}
+                            {%if i.type == "website"%}
+                            <i class='bx bxl-google'></i>
+                            {%elif i.type == "discord"%}
+                            <i class='bx bxl-discord-alt'></i>
+                            {%elif i.type == "facebook"%}
+                            <i class='bx bxl-facebook-circle'></i>
+                            {%elif i.type == "github"%}
+                            <i class='bx bxl-github'></i>
+                            {%elif i.type == "instagram"%}
+                            <i class='bx bxl-instagram-alt'></i>
+                            {%elif i.type == "linkedin"%}
+                            <i class='bx bxl-linkedin-square'></i>
+                            {%elif i.type == "medium"%}
+                            <i class='bx bxl-medium-square'></i>
+                            {%elif i.type == "quora"%}
+                            <i class='bx bxl-quora'></i>
+                            {%elif i.type == "reddit"%}
+                            <i class='bx bxl-reddit'></i>
+                            {%elif i.type == "telegram"%}
+                            <i class='bx bxl-telegram'></i>
+                            {%elif i.type == "tiktok"%}
+                            <i class='bx bxl-tiktok'></i>
+                            {%elif i.type == "twitter"%}
+                            <i class='bx bxl-twitter'></i>
+                            {%elif i.type == "whitepaper"%}
+                            <i class='bx bx-paperclip'></i>
+                            {%elif i.type == "youtube"%}
+                            <i class='bx bxl-youtube'></i>
+                            {%endif%}
+                            <a href="{{i.url}}">{{i.name}}</a></span>
+                        {%endfor%}
+                        {%else%}
+                        <span class="links" style="background-color: {{Data.color}};">No Links Available</span>
                         {%endif%}
-                        <a href="{{i.url}}">{{i.name}}</a></span>
-                    {%endfor%}
-                    {%else%}
-                    <span class="links" style="background-color: {{Data.color}};">No Links Available</span>
-                    {%endif%}
                 </div>
             </div>
         </div>
@@ -64,18 +64,29 @@
                 <span class="current">$<span class="fixcomma">{{Data.price}}</span></span>
                 <span class="changeohlc">0</span>
             </div>
-            
-            <span class="lowhigh">Low: $<span class= "fixcomma">{{OHLCData.low}}</span></span>
+
+            <span class="lowhigh">Low: $<span class="fixcomma">{{OHLCData.low}}</span></span>
             <span class="lowhigh">High: $<span class="fixcomma">{{OHLCData.high}}</span></span>
-            
+
         </div>
     </div>
     <hr>
     <div class="middle-content">
+        <div class="periodcontainer" id="pcontainer">
+            <span class="periods" id="5y"><a onclick="createChart('5y')">5y</a></span>
+            <span class="periods" id="3y"><a onclick="createChart('3y')">3y</a></span>
+            <span class="periods" id="1y"><a onclick="createChart('1y')">1y</a></span>
+            <span class="periods" id="3m"><a onclick="createChart('3m')">3m</a></span>
+            <span class="periods" id="30d"><a onclick="createChart('30d')">30d</a></span>
+            <span class="periods" id="7d"><a onclick="createChart('7d')">7d</a></span>
+            <span class="periods" id="24h"><a onclick="createChart('24h')">24h</a></span>
+            <span class="periods" id="3h"><a onclick="createChart('3h')">3h</a></span>
+        </div>
+
         <canvas id="myChart" width="400" height="400"></canvas>
     </div>
     <div class="midbot-content">
-        
+
     </div>
     <div class="bottom-content">
         <div class="price" style="border-right: 2px outset {{Data.color}};">
@@ -109,6 +120,18 @@
 </div>
 
 <script>
+    var activeperiod = "3h";
+    function setPeriodClass() {
+        elements = document.getElementById("pcontainer").children;
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].id == activeperiod) {
+                elements[i].classList.add("periodsactive");
+            } else {
+                elements[i].classList.remove("periodsactive");
+            }
+        }
+    }
+
     const data = null;
 
     const xhr = new XMLHttpRequest();
@@ -116,20 +139,20 @@
 
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-            var dataa = JSON.parse(this.responseText);
-            var time = dataa.data.history.map(function (elem) {
+            var respone = JSON.parse(this.responseText);
+            var time = respone.data.history.map(function (elem) {
                 var myDate = new Date(elem.timestamp * 1000);
                 return myDate.toLocaleString();
             })
-            var p = dataa.data.history.map(function (elem) {
+            var p = respone.data.history.map(function (elem) {
                 return elem.price;
             })
             const ctx = document.getElementById('myChart').getContext('2d');
             let delayed;
-            let gradient = ctx.createLinearGradient(0,0,0,400);
+            let gradient = ctx.createLinearGradient(0, 0, 0, 400);
             gradient.addColorStop(0, "rgba(5,56,107,1)");
             gradient.addColorStop(1, "rgba(127,90,131,0.8)");
-            const myChart = new Chart(ctx, {
+            window.myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: time,
@@ -139,22 +162,22 @@
                         backgroundColor: gradient,
                         borderColor: '#05386B',
                         borderWidth: 3,
-                        fill:true,
-                        tension:0.3,
+                        fill: true,
+                        tension: 0.3,
                     }]
                 },
                 options: {
-                    radius:2,
-                    hoverRadius:8,
+                    radius: 2,
+                    hoverRadius: 8,
                     hitRadius: 100,
-                    animation:{
-                        onComplete: () =>{
-                            delayed=true
+                    animation: {
+                        onComplete: () => {
+                            delayed = true
                         },
-                        delay: (context)=>{
+                        delay: (context) => {
                             let delay = 0;
-                            if(context.type=="data" && context.mode =="default" &&!delayed){
-                                delay = context.dataIndex*6+context.datasetIndex*2;
+                            if (context.type == "data" && context.mode == "default" && !delayed) {
+                                delay = context.dataIndex * 6 + context.datasetIndex * 2;
                             }
                             return delay;
                         }
@@ -180,8 +203,8 @@
                             grid: {
                                 color: "rgba(0, 0, 0, 0)",
                             },
-                            callback:function(value){
-                                return "$"+value;
+                            callback: function (value) {
+                                return "$" + value;
                             },
                         }
                     },
@@ -189,25 +212,49 @@
                         intersect: false
                     },
                     maintainAspectRatio: false,
+                    normalized: true,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    }
                 }
             });
+            myChart.reset();
+            myChart.update();
         }
     });
+    function destroyChart() {
+        myChart.destroy();
+    }
 
-    xhr.open("GET", "https://coinranking1.p.rapidapi.com/coin/{{Data.uuid}}/history?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h");
+    function createChart(period) {
+        activeperiod = period;
+        setPeriodClass();
+        destroyChart();
+        xhr.open("GET", "https://coinranking1.p.rapidapi.com/coin/{{Data.uuid}}/history?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=" + period);
+        xhr.setRequestHeader("x-rapidapi-host", "coinranking1.p.rapidapi.com");
+        xhr.setRequestHeader("x-rapidapi-key", "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6");
+
+        xhr.send(data);
+    }
+    xhr.open("GET", "https://coinranking1.p.rapidapi.com/coin/{{Data.uuid}}/history?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=3h");
     xhr.setRequestHeader("x-rapidapi-host", "coinranking1.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6");
 
     xhr.send(data);
+    setPeriodClass();
 </script>
+
+
 <script>
-    let change = ((parseFloat({{Data.price}})-parseFloat({{OHLCData.open}})).toFixed(3))/(parseFloat({{Data.price}}))*100
+    let change = ((parseFloat({{ Data.price }}) -parseFloat({{ OHLCData.open }})).toFixed(3)) /(parseFloat({{Data.price}}))*100
     elee = document.querySelector(".changeohlc")
-    if(change <= 0){
+    if (change <= 0) {
         elee.style.backgroundColor = "#E74C3C";
-    }else{
+    } else {
         elee.style.backgroundColor = "#2ECC71";
     }
-    elee.innerHTML = (change.toFixed(3)).toString()+"%";
+    elee.innerHTML = (change.toFixed(3)).toString() + "%";
 </script>
 {%endblock%}
