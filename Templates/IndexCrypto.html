@@ -4,24 +4,61 @@
 <div class="toppanel">
     <div class="smallpanel">
         <span class="title">Total Coins</span>
-        <span class="animatew" data-target="{{Data.stats.totalCoins}}"></span>
+        <span>{{Data.stats.totalCoins}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Markets</span>
-        <span class="animatew" data-target="{{Data.stats.totalMarkets}}"></span>
+        <span>{{Data.stats.totalMarkets}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Exchanges</span>
-        <span class="animatew" data-target="{{Data.stats.totalExchanges}}"></span>
+        <span>{{Data.stats.totalExchanges}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Market Cap</span>
-        <span class="animate" data-target="{{Data.stats.totalMarketCap}}"></span>
+        $<span class="fixcomma">{{Data.stats.totalMarketCap}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total 24H Volume</span>
-        <span class="animate" data-target="{{Data.stats.total24hVolume}}"></span>
+        $<span class="fixcomma">{{Data.stats.total24hVolume}}</span>
     </div>
+</div>
+<div class="pages">
+    <ul>
+        {%if UrlPage > 2%}
+        <a href="{%url 'CryptoIndex' 1%}">
+            <li>1</li>
+        </a>
+        <li>...</li>
+        <a href="{%url 'CryptoIndex' -1|add:UrlPage%}">
+            <li>{{UrlPage|add:"-1"}}</li>
+        </a>
+        {%endif%}
+        <!--
+        {%if UrlPage >= MaxPage|add:"-5"%}
+        <a href="{%url 'CryptoIndex' MaxPage|add:'-4'%}"><li>{{MaxPage|add:'-4'}}</li></a>
+        <a href="{%url 'CryptoIndex' MaxPage|add:'-3'%}"><li>{{MaxPage|add:'-3'}}</li></a>
+        <a href="{%url 'CryptoIndex' MaxPage|add:'-2'%}"><li>{{MaxPage|add:'-2'}}</li></a>
+        <a href="{%url 'CryptoIndex' MaxPage|add:'-1'%}"><li>{{MaxPage|add:'-1'}}</li></a>
+        <a href="{%url 'CryptoIndex' MaxPage%}"><li>{{MaxPage}}</li></a>
+        
+        {%endif%}
+        -->
+        {%for i in '012345'|make_list %}
+        {%if i == '0'%}
+        <li class="activepage">{{i|add:UrlPage}}</li>
+        {%else%}
+        <a href="{%url 'CryptoIndex' i|add:UrlPage%}">
+            <li>{{i|add:UrlPage}}</li>
+        </a>
+        {%endif%}
+        {%endfor%}
+        {%if UrlPage < MaxPage|add:"-5"%} <li>...</li>
+            <a href="{%url 'CryptoIndex' 0|add:MaxPage%}">
+                <li>{{MaxPage}}</li>
+            </a>
+            {%endif%}
+    </ul>
 </div>
 <div class="indexpanel">
     <table>
@@ -54,11 +91,19 @@
                 </a>
             </td>
             </a>
-            <td style="text-align: right;"><span class="filterint">{{i.change}}</span></td>
+            <td style="text-align: right;">
+                {%if i.change >= '0'%}
+                <span class="filterint" style="color: #2ECC71;">{{i.change}}</span>
+                {%else%}
+                <span class="filterint" style="color: #E74C3C;">{{i.change}}</span>
+                {%endif%}
+            </td>
             <td style="text-align: right;">$<span class="filterint" data-target="{{i.price}}">{{i.price}}</span></td>
-            
-            <td style="text-align: right;">$<span class="filterint" data-target="{{i.24hVolume}}">{{i.24hVolume}}</span></td>
-            <td style="text-align: right;">$<span class="filterint" data-target="{{i.marketCap}}">{{i.marketCap}}</span></td>
+
+            <td style="text-align: right;">$<span class="filterint" data-target="{{i.24hVolume}}">{{i.24hVolume}}</span>
+            </td>
+            <td style="text-align: right;">$<span class="filterint" data-target="{{i.marketCap}}">{{i.marketCap}}</span>
+            </td>
             <td style="text-align: right;"><span class="epoch">{{i.listedAt}}</span></td>
         </tr>
         {%endfor%}
@@ -68,9 +113,13 @@
 <div class="pages">
     <ul>
         {%if UrlPage > 2%}
-        <a href="{%url 'CryptoIndex' 1%}"><li>1</li></a>
+        <a href="{%url 'CryptoIndex' 1%}">
+            <li>1</li>
+        </a>
         <li>...</li>
-        <a href="{%url 'CryptoIndex' -1|add:UrlPage%}"><li>{{UrlPage|add:"-1"}}</li></a>
+        <a href="{%url 'CryptoIndex' -1|add:UrlPage%}">
+            <li>{{UrlPage|add:"-1"}}</li>
+        </a>
         {%endif%}
         <!--
         {%if UrlPage >= MaxPage|add:"-5"%}
@@ -86,13 +135,16 @@
         {%if i == '0'%}
         <li class="activepage">{{i|add:UrlPage}}</li>
         {%else%}
-        <a href="{%url 'CryptoIndex' i|add:UrlPage%}"><li>{{i|add:UrlPage}}</li></a>
+        <a href="{%url 'CryptoIndex' i|add:UrlPage%}">
+            <li>{{i|add:UrlPage}}</li>
+        </a>
         {%endif%}
         {%endfor%}
-        {%if UrlPage < MaxPage|add:"-5"%}
-        <li>...</li>
-        <a href="{%url 'CryptoIndex' 0|add:MaxPage%}"><li>{{MaxPage}}</li></a>
-        {%endif%}
+        {%if UrlPage < MaxPage|add:"-5"%} <li>...</li>
+            <a href="{%url 'CryptoIndex' 0|add:MaxPage%}">
+                <li>{{MaxPage}}</li>
+            </a>
+            {%endif%}
     </ul>
 </div>
 
@@ -102,10 +154,10 @@
         element.innerHTML = convertepoch(element.innerHTML);
     });
 
-    function convertepoch(date){
-        var myDate = new Date(date*1000);
+    function convertepoch(date) {
+        var myDate = new Date(date * 1000);
         return myDate.toLocaleString();
     }
-    
+
 </script>
 {%endblock%}
