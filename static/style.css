@@ -192,6 +192,8 @@ canvas {
 .indexpanel {
     transition: box-shadow .5s;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 10px 5px;
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
     margin: 50px;
     border-radius: 20px;
     background-color: #EDF5E1;
@@ -293,12 +295,16 @@ canvas {
     padding: 10px;
     padding-left: 15px;
     padding-right: 15px;
+    transition: background-color .5s;
+}
+.pages li:hover{
+    background-color: #5CDB95;
 }
 .pages a{
     text-decoration: none;
     color: black;
 }
 .activepage{
-    background-color: #fff;
+    background-color: #379683;
     font-weight: bold;
 }
