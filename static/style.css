@@ -277,3 +277,28 @@ canvas {
 .periodsactive {
     background-color: grey;
 }
+
+.pages{
+    background-color: #EDF5E1;
+    width: max-content;
+    margin: 0 auto;
+    user-select: none;
+}
+.pages ul{
+    padding: 0px;
+}
+.pages li{
+    display: inline-block;
+    list-style-type: none;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.pages a{
+    text-decoration: none;
+    color: black;
+}
+.activepage{
+    background-color: #fff;
+    font-weight: bold;
+}

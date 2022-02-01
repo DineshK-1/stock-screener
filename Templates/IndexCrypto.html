@@ -65,6 +65,37 @@
     </table>
 </div>
 
+<div class="pages">
+    <ul>
+        {%if UrlPage > 2%}
+        <a href="{%url 'CryptoIndex' 1%}"><li>1</li></a>
+        <li>...</li>
+        <a href="{%url 'CryptoIndex' -1|add:UrlPage%}"><li>{{UrlPage|add:"-1"}}</li></a>
+        {%endif%}
+        <!--
+        {%if UrlPage >= MaxPage|add:"-5"%}
+        <a href="{%url 'CryptoIndex' MaxPage|add:'-4'%}"><li>{{MaxPage|add:'-4'}}</li></a>
+        <a href="{%url 'CryptoIndex' MaxPage|add:'-3'%}"><li>{{MaxPage|add:'-3'}}</li></a>
+        <a href="{%url 'CryptoIndex' MaxPage|add:'-2'%}"><li>{{MaxPage|add:'-2'}}</li></a>
+        <a href="{%url 'CryptoIndex' MaxPage|add:'-1'%}"><li>{{MaxPage|add:'-1'}}</li></a>
+        <a href="{%url 'CryptoIndex' MaxPage%}"><li>{{MaxPage}}</li></a>
+        
+        {%endif%}
+        -->
+        {%for i in '012345'|make_list %}
+        {%if i == '0'%}
+        <li class="activepage">{{i|add:UrlPage}}</li>
+        {%else%}
+        <a href="{%url 'CryptoIndex' i|add:UrlPage%}"><li>{{i|add:UrlPage}}</li></a>
+        {%endif%}
+        {%endfor%}
+        {%if UrlPage < MaxPage|add:"-5"%}
+        <li>...</li>
+        <a href="{%url 'CryptoIndex' 0|add:MaxPage%}"><li>{{MaxPage}}</li></a>
+        {%endif%}
+    </ul>
+</div>
+
 <script>
     let ep = document.querySelectorAll(".epoch");
     ep.forEach(element => {

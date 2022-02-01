@@ -8,15 +8,15 @@ def Home(request):
 def IndexCrypto(request, page):
     url = "https://coinranking1.p.rapidapi.com/coins"
 
-    querystring = {"referenceCurrencyUuid":"yhjMzLPhuIDl","timePeriod":"24h","tiers":"1","orderBy":"marketCap","orderDirection":"desc","limit":"50","offset":str((page-1)*50)}
+    querystring = {"referenceCurrencyUuid":"yhjMzLPhuIDl","timePeriod":"24h","orderBy":"marketCap","orderDirection":"desc","limit":"50","offset":str((page-1)*50)}
 
     headers = {
     'x-rapidapi-host': "coinranking1.p.rapidapi.com",
     'x-rapidapi-key': "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6"
     }
 
-    response = requests.request("GET", url, headers=headers, params=querystring)
-    return render(request, "IndexCrypto.html", {'Data': response.json()["data"]})
+    response = requests.request("GET", url, headers=headers, params=querystring).json()
+    return render(request, "IndexCrypto.html", {'Data': response["data"], 'MaxPage': int(response["data"]["stats"]["totalCoins"]/50), 'UrlPage': int(page)})
 
 
 def DetailedCrypto(request, uuid):
