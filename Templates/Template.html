@@ -38,46 +38,7 @@
         function commasint(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-
-        const query = document.querySelectorAll(".animate");
-        const speed = 100;
-        query.forEach(element => {
-            const updateCount = () => {
-                target = +element.getAttribute("data-target");
-                count = +element.innerText;
-
-                inc = target * 0.01;
-
-                if (count < target) {
-                    element.innerText = count + inc;
-                    setTimeout(updateCount, 1);
-                } else {
-                    element.innerText = "$" + commas(target);
-                }
-            }
-
-            updateCount();
-        });
-        const queryw = document.querySelectorAll(".animatew");
-        queryw.forEach(element => {
-            const updateCount = () => {
-                target = +element.getAttribute("data-target");
-                count = +element.innerText;
-
-                inc = target * 0.01;
-
-                if (count < target) {
-                    element.innerText = count + inc;
-                    setTimeout(updateCount, 1);
-                } else {
-                    element.innerText = commasint(target);
-                }
-            }
-
-            updateCount();
-        });
-
-
+        
         let a = document.querySelectorAll(".filterint");
         a.forEach(element => {
             element.innerHTML = commas(element.innerHTML);
