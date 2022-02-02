@@ -14,7 +14,7 @@
 
     <ul class="nav">
         {%if request.path == "/Cryptos"%}
-        <li><a class="active" href="{%url 'CryptoIndex'%}">Cryptos</a></li>
+        <li><a class="active" href="{%url 'CryptoIndex' 1%}">Cryptos</a></li>
         <li><a href="{%url 'Home'%}">Home</a></li>
         {%else%}
         <li><a href="{%url 'CryptoIndex' 1%}">Cryptos</a></li>
@@ -33,6 +33,13 @@
         commaobj = document.querySelectorAll(".fixcomma");
         commaobj.forEach(ele => {
             ele.innerHTML = commas(ele.innerHTML);
+        })
+        function commasS(num) {
+            return "$"+commas(num);
+        }
+        commaobjj = document.querySelectorAll(".fixcommaS");
+        commaobjj.forEach(ele => {
+            ele.innerHTML = commasS(ele.innerHTML);
         })
 
         function commasint(num) {
