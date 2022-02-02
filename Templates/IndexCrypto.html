@@ -4,15 +4,15 @@
 <div class="toppanel">
     <div class="smallpanel">
         <span class="title">Total Coins</span>
-        <span>{{Data.stats.totalCoins}}</span>
+        <span class="filterint">{{Data.stats.totalCoins}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Markets</span>
-        <span>{{Data.stats.totalMarkets}}</span>
+        <span class="filterint">{{Data.stats.totalMarkets}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Exchanges</span>
-        <span>{{Data.stats.totalExchanges}}</span>
+        <span class="filterint">{{Data.stats.totalExchanges}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Market Cap</span>
@@ -30,6 +30,8 @@
             <li>1</li>
         </a>
         <li>...</li>
+        {%endif%}
+        {%if UrlPage != 1%}
         <a href="{%url 'CryptoIndex' -1|add:UrlPage%}">
             <li>{{UrlPage|add:"-1"}}</li>
         </a>
@@ -77,8 +79,8 @@
             <th>% Change</th>
             <th>Price</th>
             <th>24h Volume</th>
+            <th>Trend</th>
             <th>Market Cap</th>
-            <th></th>
         </tr>
         {%for i in Data.coins%}
         <tr class="obj">
@@ -102,12 +104,12 @@
 
             <td style="text-align: right;">$<span class="filterint" data-target="{{i.24hVolume}}">{{i.24hVolume}}</span>
             </td>
-            <td style="text-align: right;">$<span class="filterint" data-target="{{i.marketCap}}">{{i.marketCap}}</span>
-            </td>
-            <!--<td style="text-align: right;"><span class="epoch">{{i.listedAt}}</span></td>-->
             <td class="sparklines">
                 <canvas id="{{ forloop.counter0 }}" style="width: 250px !important;height: 50px !important;"></canvas>
             </td>
+            <td style="text-align: right;">$<span class="filterint" data-target="{{i.marketCap}}">{{i.marketCap}}</span>
+            </td>
+            <!--<td style="text-align: right;"><span class="epoch">{{i.listedAt}}</span></td>-->
         </tr>
         {%endfor%}
     </table>
@@ -120,10 +122,10 @@
             <li>1</li>
         </a>
         <li>...</li>
+        {%endif%}
         <a href="{%url 'CryptoIndex' -1|add:UrlPage%}">
             <li>{{UrlPage|add:"-1"}}</li>
         </a>
-        {%endif%}
         <!--
         {%if UrlPage >= MaxPage|add:"-5"%}
         <a href="{%url 'CryptoIndex' MaxPage|add:'-4'%}"><li>{{MaxPage|add:'-4'}}</li></a>
@@ -181,6 +183,14 @@
                     return elem;
                 })
                 var x = Object.keys(y);
+                var backgroundColors = [];
+                for (j = 0; j <= y.length; j++) {
+                    if (y[j] >= y[j - 1]) { backgroundColors.push('#2ECC71') }
+                    else { backgroundColors.push('#E74C3C') }
+                }
+                const up = (context, value) => context.p0.parsed.y < context.p1.parsed.y ? value : undefined;
+                const down = (context, value) => context.p0.parsed.y > context.p1.parsed.y ? value : undefined;
+
                 const ctx = document.getElementById(i).getContext('2d');
                 let delayed;
                 let gradient = ctx.createLinearGradient(0, 0, 0, 400);
@@ -193,33 +203,40 @@
                         datasets: [{
                             label: '',
                             data: y,
-                            borderColor: '#05386B',
-                            borderWidth: 1,
+                            borderColor: backgroundColors,
+                            fill: true,
+                            borderWidth: 1.2,
                             tension: 0.3,
+                            segment: {
+                                borderColor: context => up(context, "#2ECC71") || down(context, "#E74C3C"),
+                            },
                         }]
                     },
                     options: {
                         radius: 1,
-                        hoverRadius: 8,
-                        hitRadius: 10,
+                        hover: {mode: null},
+                        tooltips: {enabled: false},
                         scales: {
                             x: {
                                 ticks: {
-                                    display: false
+                                    display: false,
+                                    callback: function (value) {
+                                        return;
+                                    },
                                 },
                                 grid: {
                                     color: "rgba(0, 0, 0, 0)",
-                                }
+                                },
                             },
                             y: {
                                 ticks: {
                                     display: false,
+                                    callback: function (value) {
+                                        return "$" + value;
+                                    },
                                 },
                                 grid: {
                                     color: "rgba(0, 0, 0, 0)",
-                                },
-                                callback: function (value) {
-                                    return "$" + value;
                                 },
                             }
                         },
