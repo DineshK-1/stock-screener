@@ -218,7 +218,7 @@ canvas {
 .indexpanel td {
     font-size: small;
     transition: box-shadow .5s;
-    padding: 15px;
+    padding: 5px;
     font-weight: bold;
 }
 
@@ -312,7 +312,7 @@ canvas {
 }
 .sparklines canvas{
     width: 100% !important;
-    height: 55px !important;
+    height: 40px !important;
     user-select: none;
 }
 
