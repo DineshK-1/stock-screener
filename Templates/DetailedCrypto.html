@@ -91,19 +91,19 @@
     <div class="bottom-content">
         <div class="price" style="border-right: 2px outset {{Data.color}};">
             <span class="title">Price</span>
-            <span class="animate" data-target="{{Data.price}}">0</span>
+            <span class="fixcommaS">{{Data.price}}</span>
         </div>
         <div class="24hVolume" style="border-right: 2px outset {{Data.color}};">
             <span class="title">24H Volume</span>
-            <span class="animate" data-target="{{Data.24hVolume}}">0</span>
+            <span class="fixcommaS">{{Data.24hVolume}}</span>
         </div>
         <div class="marketCap" style="border-right: 2px outset {{Data.color}};">
             <span class="title">Market Cap</span>
-            <span class="animate" data-target="{{Data.marketCap}}">0</span>
+            <span class="fixcommaS">{{Data.marketCap}}</span>
         </div>
         <div class="allTimeHigh" style="border-right: 2px outset {{Data.color}};">
             <span class="title">All-Time High</span>
-            <span class="animate" data-target="{{Data.allTimeHigh.price}}">0</span>
+            <span class="fixcommaS">{{Data.allTimeHigh.price}}</span>
         </div>
     </div>
     <hr>
@@ -160,8 +160,8 @@
                         label: '',
                         data: p,
                         backgroundColor: gradient,
-                        borderColor: '#05386B',
-                        borderWidth: 3,
+                        borderColor: "rgba(5,56,107,1)",
+                        borderWidth: 2,
                         fill: true,
                         tension: 0.3,
                     }]
