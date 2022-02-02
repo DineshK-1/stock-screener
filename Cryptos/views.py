@@ -4,7 +4,7 @@ import requests
 import json
 
 def Home(request):
-    return render(request, "Home.html")
+    return render(request, "Home.html" , {'CurrentPage': "Home"})
 
 def RedirectCrypto(request):
     return redirect(reverse("CryptoIndex", args=(1,)))
@@ -20,7 +20,8 @@ def IndexCrypto(request, page):
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring).json()
-    return render(request, "IndexCrypto.html", {'Data': response["data"], 'MaxPage': int(response["data"]["stats"]["totalCoins"]/50), 'UrlPage': int(page)})
+    maxPage = int(response["data"]["stats"]["totalCoins"]/50)
+    return render(request, "IndexCrypto.html", {'Data': response["data"], 'MaxPage': maxPage, 'UrlPage': int(page), 'CurrentPage': "Crypto"})
 
 
 def DetailedCrypto(request, uuid):
@@ -40,7 +41,7 @@ def DetailedCrypto(request, uuid):
 
     ohlc = ohlc["data"]["ohlc"][0]
 
-    return render(request, "DetailedCrypto.html", {'Data': response.json()["data"]["coin"], "OHLCData": ohlc})
+    return render(request, "DetailedCrypto.html", {'Data': response.json()["data"]["coin"], "OHLCData": ohlc, 'CurrentPage': "Crypto"})
 
 def MarketsCrypto(request, uuid):
     url = "https://coinranking1.p.rapidapi.com/coin/"+uuid+"/markets"
@@ -52,4 +53,4 @@ def MarketsCrypto(request, uuid):
     'x-rapidapi-key': "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6"
     }
     marketresponse = requests.request("GET", url, headers=headers, params=querystring)
-    return render(request, "DetailedCrypto.html", {'MarketData': marketresponse.json()["data"]})
+    return render(request, "DetailedCrypto.html", {'MarketData': marketresponse.json()["data"], 'CurrentPage': "Crypto"})
