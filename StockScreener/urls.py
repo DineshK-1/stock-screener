@@ -18,11 +18,12 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-from Cryptos.views import IndexCrypto,DetailedCrypto,Home
+from Cryptos.views import IndexCrypto,DetailedCrypto,Home,RedirectCrypto
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", Home, name="Home"),
     path("Cryptos/<int:page>", IndexCrypto, name = "CryptoIndex"),
-    path("Cryptos/<str:uuid>", DetailedCrypto, name = "DetailedCrypto")
+    path("Cryptos/<str:uuid>", DetailedCrypto, name = "DetailedCrypto"),
+    path("Cryptos/", RedirectCrypto)
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

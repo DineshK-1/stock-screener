@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.urls import reverse
 import requests
 import json
 
 def Home(request):
     return render(request, "Home.html")
+
+def RedirectCrypto(request):
+    return redirect(reverse("CryptoIndex", args=(1,)))
 
 def IndexCrypto(request, page):
     url = "https://coinranking1.p.rapidapi.com/coins"
