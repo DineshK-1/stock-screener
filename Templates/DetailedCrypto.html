@@ -203,14 +203,15 @@
                                     size: 14,
                                     weight: "bold",
 
-                                }
+                                },
+                                callback: function (value) {
+                                    return commasS(value);
+                                },
                             },
                             grid: {
                                 color: "rgba(0, 0, 0, 0)",
                             },
-                            callback: function (value) {
-                                return "$" + value;
-                            },
+
                         }
                     },
                     hover: {
