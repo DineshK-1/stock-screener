@@ -13,10 +13,10 @@
 <body>
 
     <ul class="nav">
-        {%if request.path == "/Cryptos"%}
+        {%if CurrentPage == "Crypto"%}
         <li><a class="active" href="{%url 'CryptoIndex' 1%}">Cryptos</a></li>
         <li><a href="{%url 'Home'%}">Home</a></li>
-        {%else%}
+        {%elif CurrentPage == "Home"%}
         <li><a href="{%url 'CryptoIndex' 1%}">Cryptos</a></li>
         <li><a class="active" href="{%url 'Home'%}">Home</a></li>
         {%endif%}
