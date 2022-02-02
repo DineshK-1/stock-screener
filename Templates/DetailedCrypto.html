@@ -2,6 +2,11 @@
 
 {%block Title%}{{Data.symbol}}{%endblock%}
 {%block content%}
+<div class="breadcrumbs">
+    <a href="{%url 'CryptoIndex' 1%}">Cryptos</a>
+    <a>></a>
+    <a>{{Data.name}}</a>
+</div>
 <div class="panel">
     <div class="top">
         <img src="{{Data.iconUrl}}" alt="">

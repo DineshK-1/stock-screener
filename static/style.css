@@ -38,7 +38,9 @@ body {
 .panel {
     transition: box-shadow .5s;
     background-color: #EDF5E1;
-    margin: 50px;
+    margin: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
     border-radius: 30px;
     padding: 30px;
 }
@@ -312,4 +314,15 @@ canvas {
     width: 100% !important;
     height: 55px !important;
     user-select: none;
+}
+
+.breadcrumbs{
+    font-weight: bold;
+    padding: 5px;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+.breadcrumbs a{
+    text-decoration: none;
+    color: black;
 }
