@@ -309,6 +309,7 @@ canvas {
     font-weight: bold;
 }
 .sparklines canvas{
-    width: 250px !important;
-    height: 50px !important;
+    width: 100% !important;
+    height: 55px !important;
+    user-select: none;
 }
