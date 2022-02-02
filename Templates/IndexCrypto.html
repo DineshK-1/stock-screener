@@ -47,12 +47,14 @@
         {%endif%}
         -->
         {%for i in '012345'|make_list %}
+        {%if i|add:UrlPage <= MaxPage%}
         {%if i == '0'%}
         <li class="activepage">{{i|add:UrlPage}}</li>
         {%else%}
         <a href="{%url 'CryptoIndex' i|add:UrlPage%}">
             <li>{{i|add:UrlPage}}</li>
         </a>
+        {%endif%}
         {%endif%}
         {%endfor%}
         {%if UrlPage < MaxPage|add:"-5"%} <li>...</li>
@@ -123,9 +125,11 @@
         </a>
         <li>...</li>
         {%endif%}
+        {%if UrlPage != 1%}
         <a href="{%url 'CryptoIndex' -1|add:UrlPage%}">
             <li>{{UrlPage|add:"-1"}}</li>
         </a>
+        {%endif%}
         <!--
         {%if UrlPage >= MaxPage|add:"-5"%}
         <a href="{%url 'CryptoIndex' MaxPage|add:'-4'%}"><li>{{MaxPage|add:'-4'}}</li></a>
@@ -137,12 +141,14 @@
         {%endif%}
         -->
         {%for i in '012345'|make_list %}
+        {%if i|add:UrlPage <= MaxPage%}
         {%if i == '0'%}
         <li class="activepage">{{i|add:UrlPage}}</li>
         {%else%}
         <a href="{%url 'CryptoIndex' i|add:UrlPage%}">
             <li>{{i|add:UrlPage}}</li>
         </a>
+        {%endif%}
         {%endif%}
         {%endfor%}
         {%if UrlPage < MaxPage|add:"-5"%} <li>...</li>
