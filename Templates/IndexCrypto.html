@@ -85,7 +85,7 @@
             <th>Market Cap</th>
         </tr>
         {%for i in Data.coins%}
-        <tr class="obj">
+        <tr class="obj" id="{{ forloop.counter0 }}">
             <td>#{{i.rank}}</td>
 
             <td>
@@ -107,7 +107,7 @@
             <td style="text-align: right;">$<span class="filterint" data-target="{{i.24hVolume}}">{{i.24hVolume}}</span>
             </td>
             <td class="sparklines">
-                <canvas id="{{ forloop.counter0 }}" style="width: 250px !important;height: 50px !important;"></canvas>
+                <canvas id="{{ forloop.counter0 }}" style="width: 250px !important;height: 40px !important;"></canvas>
             </td>
             <td style="text-align: right;">$<span class="filterint" data-target="{{i.marketCap}}">{{i.marketCap}}</span>
             </td>
