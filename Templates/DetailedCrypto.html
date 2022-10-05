@@ -25,7 +25,7 @@
                     {%if Data.color == None%}
                     <span class="links" style="background-color: #3C3C3D;">
                         {%else%}
-                        <span class="links" style="background-color: {{Data.color}};">
+                        <span class="links">
                             {%endif%}
                             {%if i.type == "website"%}
                             <i class='bx bxl-google'></i>
@@ -113,11 +113,11 @@
     </div>
     <hr>
     <div class="bottom-bottom">
-        <div style="background-color: {{Data.color}};">
+        <div>
             <span class="title">Number of markets</span>
             <span>{{Data.numberOfMarkets}}</span>
         </div>
-        <div style="background-color: {{Data.color}};">
+        <div>
             <span class="title">Number of exchanges</span>
             <span>{{Data.numberOfExchanges}}</span>
         </div>
@@ -155,8 +155,8 @@
             const ctx = document.getElementById('myChart').getContext('2d');
             let delayed;
             let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-            gradient.addColorStop(0, "rgba(5,56,107,1)");
-            gradient.addColorStop(1, "rgba(127,90,131,0.8)");
+            gradient.addColorStop(0, "rgba(80, 200, 120, 0.6)");
+            gradient.addColorStop(1, "rgba(80, 200, 120, 0)");
             window.myChart = new Chart(ctx, {
                 type: 'line',
                 data: {
@@ -165,7 +165,7 @@
                         label: '',
                         data: p,
                         backgroundColor: gradient,
-                        borderColor: "rgba(5,56,107,1)",
+                        borderColor: "rgba(80, 200, 120, 1)",
                         borderWidth: 2,
                         fill: true,
                         tension: 0.3,
@@ -194,11 +194,12 @@
                             },
                             grid: {
                                 color: "rgba(0, 0, 0, 0)",
-                            }
+                            },
+                            reverse:true,
                         },
                         y: {
                             ticks: {
-                                color: "#05386B",
+                                color: "#a1a7bb",
                                 font: {
                                     size: 14,
                                     weight: "bold",

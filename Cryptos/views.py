@@ -11,17 +11,24 @@ def RedirectCrypto(request):
 
 def IndexCrypto(request, page):
     url = "https://coinranking1.p.rapidapi.com/coins"
-
-    querystring = {"referenceCurrencyUuid":"yhjMzLPhuIDl","timePeriod":"24h","orderBy":"marketCap","orderDirection":"desc","limit":"50","offset":str((page-1)*50)}
-
     headers = {
-    'x-rapidapi-host': "coinranking1.p.rapidapi.com",
-    'x-rapidapi-key': "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6"
+        'x-rapidapi-host': "coinranking1.p.rapidapi.com",
+        'x-rapidapi-key': "1308a3e81fmshc5c7805a1477572p1ac776jsn696bc69cace6"
     }
+    if request.method == "GET":
+        querystring = {"referenceCurrencyUuid":"yhjMzLPhuIDl","timePeriod":"24h","orderBy":"marketCap","orderDirection":"desc","limit":"50","offset":str((page-1)*50)}
 
-    response = requests.request("GET", url, headers=headers, params=querystring).json()
-    maxPage = int(response["data"]["stats"]["totalCoins"]/50)
-    return render(request, "IndexCrypto.html", {'Data': response["data"], 'MaxPage': maxPage, 'UrlPage': int(page), 'CurrentPage': "Crypto"})
+        response = requests.request("GET", url, headers=headers, params=querystring).json()
+        maxPage = int(response["data"]["stats"]["totalCoins"]/50)
+        return render(request, "IndexCrypto.html", {'Data': response["data"], 'MaxPage': maxPage, 'UrlPage': int(page), 'CurrentPage': "Crypto"})
+    else:
+        data = dict(request.POST)
+        
+        querystring = {"referenceCurrencyUuid":data["currency"][0],"timePeriod":"24h","orderBy":data["orderBy"][0],"orderDirection":data["orderDirection"][0],"limit":data["limit"][0],"offset":str((page-1)*int(data["limit"][0]))}
+        response = requests.request("GET", url, headers=headers, params=querystring).json()
+        maxPage = int(response["data"]["stats"]["totalCoins"]/50)
+        
+        return render(request, "IndexCrypto.html", {'Data': response["data"], 'MaxPage': maxPage, 'UrlPage': int(page), 'CurrentPage': "Crypto"})
 
 
 def DetailedCrypto(request, uuid):

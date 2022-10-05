@@ -4,15 +4,15 @@
 <div class="toppanel">
     <div class="smallpanel">
         <span class="title">Total Coins</span>
-        <span class="filterint">{{Data.stats.totalCoins}}</span>
+        <span>{{Data.stats.totalCoins}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Markets</span>
-        <span class="filterint">{{Data.stats.totalMarkets}}</span>
+        <span>{{Data.stats.totalMarkets}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Exchanges</span>
-        <span class="filterint">{{Data.stats.totalExchanges}}</span>
+        <span>{{Data.stats.totalExchanges}}</span>
     </div>
     <div class="smallpanel">
         <span class="title">Total Market Cap</span>
@@ -23,6 +23,50 @@
         $<span class="fixcomma">{{Data.stats.total24hVolume}}</span>
     </div>
 </div>
+<!--
+<div class="searchpanel">
+    <form action="{%url 'CryptoIndex' 1%}" method="post">
+        {%csrf_token%}
+        <input type="text" placeholder="Search">
+        <select name="orderBy" id="orderBy">
+            <option value="price">Price</option>
+            <option value="marketCap" selected>Market Cap</option>
+            <option value="24hVolume">24hVolume</option>
+            <option value="change">Change</option>
+          </select>
+          <select name="limit" id="limit">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50" selected>50</option>
+            <option value="100">100</option>
+          </select>
+          <select name="currency" id="currency">
+            <option value="yhjMzLPhuIDl">USD</option>
+            <option value="5k-_VTxqtCEI">EUR</option>
+            <option value="6mUvpzCc2lFo">INR</option>
+            <option value="_4s0A3Uuu5ML">CAD</option>
+            <option value="Qwsogvtv82FCd">BTC</option>
+            <option value="razxDUgYGNAdQ">ETH</option>
+            <option value="WcwrkfNI4FUAe">BNB</option>
+          </select>
+          <select name="tags" id="tags">
+            <option value="">None</option>
+            <option value="defi">DeFi</option>
+            <option value="stablecoin">StableCoin</option>
+            <option value="nft">NFT</option>
+            <option value="dex">Dex</option>
+            <option value="exchange">Exchange</option>
+            <option value="staking">Staking</option>
+            <option value="dao">DAO</option>
+            <option value="meme">Meme</option>
+            <option value="privacy">Privacy</option>
+          </select>
+          <input type="radio" value="asc" name="orderDirection"/>Asc
+          <input type="radio" value="desc" name="orderDirection" checked/>Desc
+          <button type="submit" class="submitForm"></button>
+    </form>
+</div>
+-->
 <div class="pages">
     <ul>
         {%if UrlPage > 2%}
@@ -61,7 +105,7 @@
             <a href="{%url 'CryptoIndex' 0|add:MaxPage%}">
                 <li>{{MaxPage}}</li>
             </a>
-            {%endif%}
+        {%endif%}
     </ul>
 </div>
 <div class="indexpanel">
@@ -85,13 +129,13 @@
             <th>Market Cap</th>
         </tr>
         {%for i in Data.coins%}
-        <tr class="obj" id="{{ forloop.counter0 }}">
-            <td>#{{i.rank}}</td>
+        <tr class="obj" id="{{ forloop.counter0 }}object">
+            <td style="text-align:center">#{{i.rank}}</td>
 
             <td>
                 <img src="{{i.iconUrl}}" style="width: 20px;height: 20px;vertical-align:middle;"></img>
                 <a href="{%url 'DetailedCrypto' i.uuid%}">
-                    <span>{{i.name}}({{i.symbol}})</span>
+                    <span>{{i.name}}<span class="symbols" style="background-color:{{i.color}}">{{i.symbol}}</span></span>
                 </a>
             </td>
             </a>
@@ -155,7 +199,7 @@
             <a href="{%url 'CryptoIndex' 0|add:MaxPage%}">
                 <li>{{MaxPage}}</li>
             </a>
-            {%endif%}
+        {%endif%}
     </ul>
 </div>
 
